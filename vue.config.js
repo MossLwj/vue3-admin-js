@@ -1,4 +1,6 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === "production" ? "" : "/",
+  outputPath: process.env.NODE_ENV === "production" ? "dist" : "/devDist",
   css: {
     loaderOptions: {
       // 默认情况下 `sass` 选项会同时对 `sass` 和 `scss` 语法同时生效
