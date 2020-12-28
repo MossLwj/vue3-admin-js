@@ -1,44 +1,44 @@
 <template>
   <div>
-    <template v-for="route in menu">
-      <template v-if="!route.hidden">
-        <!--   一级路由   -->
-        <a-menu-item v-if="!route.children" :key="route.path">
-          <span>{{ route.meta && route.meta.title }}</span>
-        </a-menu-item>
-
-        <!--   嵌套路由   -->
-        <a-sub-menu v-else :key="route.path">
-          <!--    title    -->
-          <template #title>
-            <span>
-              {{ route.meta && route.meta.title }}
-            </span>
-          </template>
-          <Menu :menu="route.children" />
-          <!--          <template v-if="!route.children.children">-->
-          <!--            <a-menu-item v-for="child in route.children" :key="child.path">-->
-          <!--              {{ child.meta && child.meta.title }}-->
-          <!--            </a-menu-item>-->
-          <!--          </template>-->
-          <!--          <template v-else>-->
-          <!--            -->
-          <!--          </template>-->
-        </a-sub-menu>
+    <a-sub-menu :key="menuInfo.path" v-bind="$attrs">
+      <template #title>
+        <i
+          class="icon icon-size-21 mb--5"
+          :class="menuInfo.meta && menuInfo.meta.icon"
+        />
+        {{ menuInfo.meta && menuInfo.meta.title }}
       </template>
-    </template>
+      <template v-for="item in menuInfo.children" :key="item.path">
+        <template v-if="!item.children">
+          <a-menu-item :key="item.path">
+            <router-link :to="item.path">
+              <i
+                class="icon icon-size-21 mb--5"
+                :class="item.meta && item.meta.icon"
+              />
+              {{ item.meta && item.meta.title }}
+            </router-link>
+          </a-menu-item>
+        </template>
+        <template v-else>
+          <Menu :menu-info="item" :key="item.path" />
+        </template>
+      </template>
+    </a-sub-menu>
   </div>
 </template>
 <script>
 export default {
   name: "Menu",
   props: {
-    menu: {
+    menuInfo: {
       type: Object,
       default: () => ({})
     }
   },
-  setup() {}
+  setup(props) {
+    console.log(props.menuInfo);
+  }
 };
 </script>
 <style scoped></style>

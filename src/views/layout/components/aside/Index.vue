@@ -1,20 +1,42 @@
 <template>
   <div>
+    <h1 id="logo">
+      <img :src="logo" alt="前端" />
+    </h1>
     <a-menu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
       theme="dark"
       :inline-collapsed="collapsed"
+      @click="selectMenu"
+      @openChange="openMenu"
     >
-      <Menu :menu="routes" />
+      <template v-for="item in routes" :key="item.path">
+        <template v-if="!item.hidden">
+          <template v-if="!item.children">
+            <a-menu-item :key="item.path">
+              <router-link :to="item.path">
+                <i
+                  class="icon icon-size-21 mb--5"
+                  :class="item.meta && item.meta.icon"
+                />
+                {{ item.meta && item.meta.title }}
+              </router-link>
+            </a-menu-item>
+          </template>
+          <template v-else>
+            <Menu :menu-info="item" :key="item.path" />
+          </template>
+        </template>
+      </template>
     </a-menu>
   </div>
 </template>
 <script>
 import { reactive, toRefs } from "vue";
 //  路由
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
 import Menu from "./Menu";
 
@@ -24,24 +46,48 @@ export default {
     Menu
   },
   setup() {
-    console.log(useRoute());
-    console.log(useRouter());
     const { options } = useRouter();
 
     const routes = options.routes;
-
+    console.log(options);
     const menuConfig = reactive({
       collapsed: false,
-      selectedKeys: ["1"],
-      openKeys: ["sub1"],
-      preOpenKeys: ["sub1"]
+      selectedKeys: localStorage.getItem("selectedKeys")
+        ? [localStorage.getItem("selectedKeys")]
+        : [],
+      openKeys: localStorage.getItem("openKeys")
+        ? [localStorage.getItem("openKeys")]
+        : [],
+      preOpenKeys: ["sub1"],
+      logo: require("@/assets/images/logo.png")
     });
+
+    const selectMenu = ({ key }) => {
+      menuConfig.selectedKeys = [key];
+      localStorage.setItem("selectedKeys", [key]);
+    };
+
+    const openMenu = openKeys => {
+      menuConfig.openKeys = openKeys;
+      localStorage.setItem("openKeys", openKeys);
+    };
 
     return {
       ...toRefs(menuConfig),
-      routes
+      routes,
+      selectMenu,
+      openMenu
     };
   }
 };
 </script>
-<style scoped></style>
+<style lang="scss" scoped>
+#logo {
+  padding: 24px 0 20px;
+  border: 1px solid #000;
+  text-align: center;
+  img {
+    display: inline-block;
+  }
+}
+</style>

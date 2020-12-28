@@ -1,0 +1,25 @@
+i[class^=icon] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 0,0;
+}
+
+.icon-size-21 {
+  width: 21px;
+  height: 21px;
+}
+
+.mb--5 {
+  margin-bottom: -5px;
+}
+
+.icon-aside-console {
+  background-image: url("~@/assets/icons/aside-console.png");
+}
+
+.icon-aside-home {
+  background-image: url("~@/assets/icons/aside-home.png");
+}
+.icon-aside-information {
+  background-image: url("~@/assets/icons/aside-information.png");
+}

@@ -23,7 +23,8 @@ const routes = [
     path: "/index",
     name: "Index",
     meta: {
-      title: "首页"
+      title: "首页",
+      icon: "icon-aside-console"
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -35,7 +36,8 @@ const routes = [
     path: "/adminIndex",
     name: "AdminIndex",
     meta: {
-      title: "管理总台"
+      title: "管理总台",
+      icon: "icon-aside-home"
     },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/layout/Index.vue"),
@@ -46,19 +48,27 @@ const routes = [
         meta: {
           title: "角色管理"
         },
-        component: () => import("../views/admin/Role.vue"),
-        children: [
-          {
-            path: "/a",
-            name: "A",
-            meta: {
-              title: "角色管理-1"
-            },
-            component: () => import("../views/admin/Role.vue")
-          }
-        ]
+        component: () => import("../views/admin/Role.vue")
+      },
+      {
+        path: "/user",
+        name: "User",
+        meta: {
+          title: "用户管理"
+        },
+        component: () => import("../views/admin/User.vue")
       }
     ]
+  },
+  {
+    path: "/news",
+    name: "News",
+    meta: {
+      title: "信息管理",
+      icon: "icon-aside-information"
+    },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/layout/Index.vue")
   }
 ];
 
