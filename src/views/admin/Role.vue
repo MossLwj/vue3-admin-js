@@ -1,9 +1,11 @@
 <template>
-  <router-view />
+  Role
 </template>
+
 <script>
 export default {
-  name: "Main"
+  name: "Role"
 };
 </script>
+
 <style scoped></style>
