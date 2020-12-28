@@ -46,7 +46,17 @@ const routes = [
         meta: {
           title: "角色管理"
         },
-        component: () => import("../views/admin/Role.vue")
+        component: () => import("../views/admin/Role.vue"),
+        children: [
+          {
+            path: "/a",
+            name: "A",
+            meta: {
+              title: "角色管理-1"
+            },
+            component: () => import("../views/admin/Role.vue")
+          }
+        ]
       }
     ]
   }

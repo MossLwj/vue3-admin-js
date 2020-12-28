@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import LayoutAside from "./components/Aside";
+import LayoutAside from "./components/aside/Index";
 import LayoutMain from "./components/Main";
 import LayoutHeader from "./components/Header";
 import { reactive, toRefs } from "vue";

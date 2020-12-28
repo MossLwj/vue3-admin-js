@@ -7,26 +7,7 @@
       theme="dark"
       :inline-collapsed="collapsed"
     >
-      <template v-for="route in routes">
-        <template v-if="!route.hidden">
-          <a-menu-item v-if="!route.children" :key="route.path">
-            <span>{{ route.meta && route.meta.title }}</span>
-          </a-menu-item>
-
-          <a-sub-menu v-else :key="route.path">
-            <template #title>
-              <span>
-                {{ route.meta && route.meta.title }}
-              </span>
-            </template>
-            <template v-if="route.children.length">
-              <a-menu-item v-for="child in route.children" :key="child.path">
-                {{ child.meta && child.meta.title }}
-              </a-menu-item>
-            </template>
-          </a-sub-menu>
-        </template>
-      </template>
+      <Menu :menu="routes" />
     </a-menu>
   </div>
 </template>
@@ -35,8 +16,13 @@ import { reactive, toRefs } from "vue";
 //  路由
 import { useRoute, useRouter } from "vue-router";
 
+import Menu from "./Menu";
+
 export default {
   name: "Aside",
+  components: {
+    Menu
+  },
   setup() {
     console.log(useRoute());
     console.log(useRouter());
