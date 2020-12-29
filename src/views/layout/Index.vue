@@ -8,7 +8,7 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <LayoutHeader />
+        <LayoutHeader @collapsed="handleCollapsed" />
       </a-layout-header>
       <a-layout-content
         :style="{
@@ -42,8 +42,13 @@ export default {
       collapsed: false
     });
 
+    const handleCollapsed = () => {
+      data.collapsed = !data.collapsed;
+    };
+
     return {
-      ...toRefs(data)
+      ...toRefs(data),
+      handleCollapsed
     };
   }
 };

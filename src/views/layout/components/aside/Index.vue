@@ -17,12 +17,16 @@
           <template v-if="!item.children">
             <a-menu-item :key="item.path">
               <router-link :to="item.path">
-                <svg-icon iconName="home" />
-                <i
-                  class="icon icon-size-21 mb--5"
-                  :class="item.meta && item.meta.icon"
-                />
-                {{ item.meta && item.meta.title }}
+                <span class="anticon">
+                  <svg-icon iconName="home" />
+                </span>
+                <!--                <i-->
+                <!--                  class="icon icon-size-21 mb&#45;&#45;5"-->
+                <!--                  :class="item.meta && item.meta.icon"-->
+                <!--                />-->
+                <span>
+                  {{ item.meta && item.meta.title }}
+                </span>
               </router-link>
             </a-menu-item>
           </template>

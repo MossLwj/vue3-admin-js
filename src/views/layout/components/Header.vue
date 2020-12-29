@@ -1,5 +1,13 @@
 <template>
   <div id="header">
+    <a-button
+      type="primary"
+      @click="toggleCollapsed"
+      style="margin-bottom: 16px"
+    >
+      <MenuUnfoldOutlined v-if="collapsed" />
+      <MenuFoldOutlined v-else />
+    </a-button>
     <div class="header-menu">
       <a-dropdown>
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
@@ -36,12 +44,21 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, getCurrentInstance } from "vue";
 import { useI18n } from "vue-i18n";
+
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
 
 export default {
   name: "Header",
+  components: {
+    MenuUnfoldOutlined,
+    MenuFoldOutlined
+  },
   setup() {
+    //  通过getCurrentInstance()方法获取上下文信息
+    const { emit } = getCurrentInstance();
+
     const { locale } = useI18n({ useScope: "global" });
 
     const config = reactive({
@@ -61,9 +78,17 @@ export default {
       config.currentLanguage = value;
     };
 
+    /**
+     * 收缩左侧菜单点击事件
+     */
+    const toggleCollapsed = () => {
+      emit("collapsed");
+    };
+
     return {
       ...toRefs(config),
-      toggleLanguage
+      toggleLanguage,
+      toggleCollapsed
     };
   }
 };
