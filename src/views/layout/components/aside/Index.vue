@@ -17,6 +17,7 @@
           <template v-if="!item.children">
             <a-menu-item :key="item.path">
               <router-link :to="item.path">
+                <SvgIcon iconName="home" />
                 <i
                   class="icon icon-size-21 mb--5"
                   :class="item.meta && item.meta.icon"
@@ -40,10 +41,13 @@ import { useRouter } from "vue-router";
 
 import Menu from "./Menu";
 
+import SvgIcon from "@/components/SvgIcon";
+
 export default {
   name: "Aside",
   components: {
-    Menu
+    Menu,
+    SvgIcon
   },
   setup() {
     const { options } = useRouter();

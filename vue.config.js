@@ -1,6 +1,22 @@
+const path = require("path");
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "" : "/",
   outputDir: process.env.NODE_ENV === "production" ? "dist" : "/devDist",
+  chainWebpack: config => {
+    //  svg配置
+
+    //  删除默认的SVG配置
+    config.module.rules.delete("svg");
+
+    config.module
+      .rule("svg-sprite-loader")
+      .test(/\.svg$/)
+      .include.add(path.resolve("./src/assets/svg")) //  处理svg目录
+      .end()
+      .use("svg-sprite-loader")
+      .loader("svg-sprite-loader")
+      .options({ symbolId: "icon-[name]" });
+  },
   css: {
     loaderOptions: {
       // 默认情况下 `sass` 选项会同时对 `sass` 和 `scss` 语法同时生效
