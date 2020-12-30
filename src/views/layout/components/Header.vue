@@ -55,6 +55,12 @@ export default {
     MenuUnfoldOutlined,
     MenuFoldOutlined
   },
+  props: {
+    collapsed: {
+      type: Boolean,
+      default: false
+    }
+  },
   setup() {
     //  通过getCurrentInstance()方法获取上下文信息
     const { emit } = getCurrentInstance();
@@ -82,7 +88,7 @@ export default {
      * 收缩左侧菜单点击事件
      */
     const toggleCollapsed = () => {
-      emit("collapsed");
+      emit("clickCollapsed");
     };
 
     return {

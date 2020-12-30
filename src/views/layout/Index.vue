@@ -8,7 +8,10 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <LayoutHeader @collapsed="handleCollapsed" />
+        <LayoutHeader
+          @clickCollapsed="handleCollapsed"
+          :collapsed="collapsed"
+        />
       </a-layout-header>
       <a-layout-content
         :style="{
