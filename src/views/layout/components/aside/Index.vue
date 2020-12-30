@@ -61,7 +61,7 @@ export default {
         ? [localStorage.getItem("selectedKeys")]
         : [],
       openKeys: localStorage.getItem("openKeys")
-        ? [localStorage.getItem("openKeys")]
+        ? JSON.parse(localStorage.getItem("openKeys"))
         : [],
       preOpenKeys: ["sub1"],
       logo: require("@/assets/images/logo.png")
@@ -74,7 +74,7 @@ export default {
 
     const openMenu = openKeys => {
       menuConfig.openKeys = openKeys;
-      localStorage.setItem("openKeys", openKeys);
+      localStorage.setItem("openKeys", JSON.stringify(openKeys));
     };
 
     return {
